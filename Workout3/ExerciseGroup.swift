@@ -5,10 +5,10 @@
 //  Created by Warren Hansen on 5/25/24.
 //
 //  Created by Warren Hansen on 5/25/24.
-//  make a list of Bench, curls, fly's, lig lift,
-//  items incluse num reps, weight and completed
-
-//  ui has each item and num reps completed
+//  X make a list of Bench, curls, fly's, lig lift,
+//  X items incluse num reps, weight and completed
+//  X ui has each item and num reps completed
+//  toggle set completed
 //  when all completed return to main and show last workout
 //  list all workouts in main
 import SwiftUI
@@ -37,31 +37,27 @@ class DataLoader {
     func firstRun() -> [Exercise] {
         let exercise1 = Exercise(group: "Group A", name: "Bench", numReps: 8, numSets: 4, weight: 135, completed: false)
         
-        let exercise2 = Exercise(group: "Group A", name: "Curls", numReps: 8, numSets: 4, weight: 50, completed: false)
+        let exercise2 = Exercise(group: "Group A", name: "Curls", numReps: 8, numSets: 3, weight: 50, completed: false)
         
         let exercise3 = Exercise(group: "Group A", name: "Fly's", numReps: 8, numSets: 4, weight: 40, completed: false)
         
-        let exercise4 = Exercise(group: "Group A", name: "Leg Lifts", numReps: 8, numSets: 4, weight: 0, completed: false)
+        let exercise4 = Exercise(group: "Group A", name: "Leg Lifts", numReps: 8, numSets: 3, weight: 0, completed: false)
         var exercises: [Exercise] = []
         exercises.append(exercise1)
         exercises.append(exercise2)
         exercises.append(exercise3)
         exercises.append(exercise4)
         return exercises
-        
     }
 }
 
-// todo loop through reps and fill in details
-struct TaskRow: View {
+struct ExerciseReps: View {
     var exercise: Exercise
     var body: some View {
-        
-        let numSets = 1...exercise.numSets
         VStack {
-            ForEach(numSets, id: \.self) { i in
+            ForEach(1...exercise.numSets, id: \.self) { num in
                 HStack {
-                    Text("\(i)")
+                    Text("\(num)")
                     Spacer()
                     Text("\(exercise.weight) lbs")
                     Spacer()
@@ -73,32 +69,25 @@ struct TaskRow: View {
         }
     }
 }
-struct ContentView: View {
+struct ExerciseGroup: View {
     
     @Environment(\.modelContext) private var modelContext
     @Query private var exercise: [Exercise]
-    @State var text: String = "Hello World!"
     let dataLoader =  DataLoader()
     
     var body: some View {
         
         VStack {
             Text(exercise.first?.group ?? "no Group").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            
-            
             List(exercise)  { this in
-                //Text($0.name)
                 Section(header: Text(this.name)) {
-                    TaskRow(exercise: this)
-//                    TaskRow()
-//                    TaskRow()
+                    ExerciseReps(exercise: this)
                     
                 }.headerProminence(.increased)
                 
             }
         }.onAppear() {
             loadExercises()
-            
         }
         .padding()
     }
@@ -106,8 +95,6 @@ struct ContentView: View {
     private func loadExercises() {
         if exercise.isEmpty {
             firstRun()
-        } else {
-            text = "You have \(exercise.count) exercises"
         }
     }
     
@@ -125,6 +112,6 @@ struct ContentView: View {
     for item in dataLoader.firstRun() {
         container.mainContext.insert(item)
     }
-    return ContentView()
+    return ExerciseGroup()
         .modelContainer(container)
 }
