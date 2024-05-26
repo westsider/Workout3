@@ -6,12 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct Workout3App: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+
+    let modelContainer: ModelContainer
+
+        init() {
+            do {
+                modelContainer = try ModelContainer(for: Exercise.self)
+            } catch {
+                fatalError("Could not initialize ModelContainer")
+            }
         }
-    }
+
+        var body: some Scene {
+            WindowGroup {
+                ContentView()
+            }
+            .modelContainer(modelContainer)
+        }
+
 }
