@@ -11,9 +11,9 @@
 //  X toggle set completed
 //  X create aonther workout goup
 //  X step weight
+//  X main screen
+//  X nav to exercise screen
 
-//  main screen
-//  nav to exercise screen
 //  when all completed return to main and show last workout
 //  list all workouts in main
 //  persist values
@@ -24,14 +24,20 @@ import SwiftData
 struct ExerciseGroup: View {
     
     @Environment(\.modelContext) private var modelContext
-   // @Query private var exercise: [Exercise]
+    @Query private var exercise: [Exercise]
     let dataLoader =  DataLoader()
     let groupName: String
     
     @Query(filter: #Predicate<Exercise> { exercises in
-        exercises.group == "Group B"
+        exercises.group == "Group A"
     }) var movies: [Exercise]
 
+    init(groupName: String) {
+        self.groupName = groupName
+            _movies = Query(filter: #Predicate<Exercise> { exercises in
+                exercises.group == groupName
+            })
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -49,7 +55,7 @@ struct ExerciseGroup: View {
     }
     
     private func loadExercises() {
-        if movies.isEmpty {
+        if exercise.isEmpty {
             firstRun()
         }
     }
@@ -72,9 +78,6 @@ struct ExerciseGroup: View {
     for item in dataLoader.GroupA() {
         container.mainContext.insert(item)
     }
-    for item in dataLoader.GroupB() {
-        container.mainContext.insert(item)
-    }
-    return ExerciseGroup(groupName: "Group B")
+    return ExerciseGroup(groupName: "Group A")
         .modelContainer(container)
 }
