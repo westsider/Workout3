@@ -15,7 +15,6 @@
 //  X nav to exercise screen
 
 //  when all completed return to main and show last workout
-//  list all workouts in main
 //  persist values
 
 import SwiftUI
@@ -44,8 +43,7 @@ struct ExerciseGroup: View {
             Text(groupName).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
             List(movies)  { this in
                 Section(header: Text(this.name)) {
-                    ExerciseReps(exercise: this)
-                    
+                    ExerciseReps(id: this.id)
                 }.headerProminence(.increased)
             }
         }.onAppear() {
@@ -78,6 +76,19 @@ struct ExerciseGroup: View {
     for item in dataLoader.GroupA() {
         container.mainContext.insert(item)
     }
+    
+    for item in dataLoader.GroupB() {
+        container.mainContext.insert(item)
+    }
+    
+    for item in dataLoader.GroupC() {
+        container.mainContext.insert(item)
+    }
+    
+    for item in dataLoader.GroupD() {
+        container.mainContext.insert(item)
+    }
+    
     return ExerciseGroup(groupName: "Group A")
         .modelContainer(container)
 }
