@@ -23,7 +23,7 @@ struct Workout3App: App {
 
         var body: some Scene {
             WindowGroup {
-                ExerciseGroup()
+                HomeView()
             }
             .modelContainer(modelContainer)
         }

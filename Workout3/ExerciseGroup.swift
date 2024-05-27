@@ -24,14 +24,19 @@ import SwiftData
 struct ExerciseGroup: View {
     
     @Environment(\.modelContext) private var modelContext
-    @Query private var exercise: [Exercise]
+   // @Query private var exercise: [Exercise]
     let dataLoader =  DataLoader()
+    let groupName: String
+    
+    @Query(filter: #Predicate<Exercise> { exercises in
+        exercises.group == "Group B"
+    }) var movies: [Exercise]
+
     
     var body: some View {
-        
         VStack(alignment: .leading) {
-            Text(exercise.first?.group ?? "no Group").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            List(exercise)  { this in
+            Text(groupName).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            List(movies)  { this in
                 Section(header: Text(this.name)) {
                     ExerciseReps(exercise: this)
                     
@@ -44,7 +49,7 @@ struct ExerciseGroup: View {
     }
     
     private func loadExercises() {
-        if exercise.isEmpty {
+        if movies.isEmpty {
             firstRun()
         }
     }
@@ -67,6 +72,9 @@ struct ExerciseGroup: View {
     for item in dataLoader.GroupA() {
         container.mainContext.insert(item)
     }
-    return ExerciseGroup()
+    for item in dataLoader.GroupB() {
+        container.mainContext.insert(item)
+    }
+    return ExerciseGroup(groupName: "Group B")
         .modelContainer(container)
 }

@@ -14,6 +14,7 @@
 		98AA536E2C039F36005D095F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA536D2C039F36005D095F /* Data.swift */; };
 		98AA53702C039F70005D095F /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA536F2C039F70005D095F /* Helpers.swift */; };
 		98AA53722C039F96005D095F /* ExerciseReps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA53712C039F96005D095F /* ExerciseReps.swift */; };
+		98AA53742C04E5A8005D095F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA53732C04E5A8005D095F /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		98AA536D2C039F36005D095F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		98AA536F2C039F70005D095F /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		98AA53712C039F96005D095F /* ExerciseReps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseReps.swift; sourceTree = "<group>"; };
+		98AA53732C04E5A8005D095F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				98AA535F2C02723F005D095F /* Workout3App.swift */,
+				98AA53732C04E5A8005D095F /* HomeView.swift */,
 				98AA53612C02723F005D095F /* ExerciseGroup.swift */,
 				98AA53712C039F96005D095F /* ExerciseReps.swift */,
 				98AA536D2C039F36005D095F /* Data.swift */,
@@ -149,6 +152,7 @@
 				98AA53622C02723F005D095F /* ExerciseGroup.swift in Sources */,
 				98AA536E2C039F36005D095F /* Data.swift in Sources */,
 				98AA53722C039F96005D095F /* ExerciseReps.swift in Sources */,
+				98AA53742C04E5A8005D095F /* HomeView.swift in Sources */,
 				98AA53602C02723F005D095F /* Workout3App.swift in Sources */,
 				98AA53702C039F70005D095F /* Helpers.swift in Sources */,
 			);
