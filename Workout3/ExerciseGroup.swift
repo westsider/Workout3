@@ -13,40 +13,65 @@
 //  X step weight
 //  X main screen
 //  X nav to exercise screen
-
 //  when all completed return to main and show last workout
-//  persist values
+
+//  use correct workouts
+//  show last workout
 
 import SwiftUI
 import SwiftData
 
 struct ExerciseGroup: View {
     
+    @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query private var exercise: [Exercise]
     let dataLoader =  DataLoader()
     let groupName: String
+    @State var completed = 0
     
     @Query(filter: #Predicate<Exercise> { exercises in
         exercises.group == "Group A"
-    }) var movies: [Exercise]
+    }) var exercises: [Exercise]
 
     init(groupName: String) {
         self.groupName = groupName
-            _movies = Query(filter: #Predicate<Exercise> { exercises in
-                exercises.group == groupName
+            _exercises = Query(filter: #Predicate<Exercise> { exercisesS in
+                exercisesS.group == groupName
             })
     }
     
     var body: some View {
         VStack(alignment: .leading) {
             Text(groupName).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            List(movies)  { this in
+            List(exercises)  { this in
                 Section(header: Text(this.name)) {
                     ExerciseReps(id: this.id)
                 }.headerProminence(.increased)
                     .foregroundStyle(this.completed ? .blue : .primary)
+                    .onChange(of: this.completed) { newValue in
+                        // checlk for number of completed exercoses
+                        print("exercises changed")
+                        completed = 0
+                        for each in exercise {
+                            if each.completed {
+                                completed += 1
+                            }
+                        }
+                        print("Compleded = \(completed) of \(exercises.count) exercises")
+                        // if that is all of them >
+                        if completed == exercises.count {
+                            print("Workout Complete")
+                            dismiss()
+                        }
+                        // 1. reset the completed vars
+                        // 2. place date and time on last workout
+                        // 2. segue back to main
+                        
+
+                    }
             }
+            
         }.onAppear() {
             loadExercises()
         }
