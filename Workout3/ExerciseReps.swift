@@ -40,11 +40,21 @@ struct ExerciseReps: View {
                     Spacer()
                     Toggle("", isOn: $isOn[num - 1])
                         .toggleStyle(CheckToggleStyle())
+                        
                 }
             }.onAppear() {
                 weight = exercise.first?.weight ?? 45
+                print("appera")
             }.onDisappear() {
                 exercise.first?.weight = weight
+            }.onChange(of: isOn) { newValue in
+                let numSets = exercise.first?.numSets ?? 3
+                let numberOfTrue = isOn.filter{$0}.count
+                print("completed \(numberOfTrue) of \(numSets)")
+                if numSets == numberOfTrue {
+                    print("completed!")
+                    exercise.first?.completed = true
+                }
             }
         }
     }

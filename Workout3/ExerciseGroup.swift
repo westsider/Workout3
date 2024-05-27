@@ -45,6 +45,7 @@ struct ExerciseGroup: View {
                 Section(header: Text(this.name)) {
                     ExerciseReps(id: this.id)
                 }.headerProminence(.increased)
+                    .foregroundStyle(this.completed ? .blue : .primary)
             }
         }.onAppear() {
             loadExercises()
