@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct ExerciseReps: View {
+    
     var id: UUID
+    @Environment(\.modelContext) private var modelContext
     @State var isOn: [Bool] = [false, false, false, false]
     @State private var weight = 45
     @Query private var exercise: [Exercise]
@@ -41,6 +43,8 @@ struct ExerciseReps: View {
                 }
             }.onAppear() {
                 weight = exercise.first?.weight ?? 45
+            }.onDisappear() {
+                exercise.first?.weight = weight
             }
         }
     }

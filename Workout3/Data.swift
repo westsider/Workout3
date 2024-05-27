@@ -31,28 +31,6 @@ final class Exercise {
 }
 
 class DataLoader {
-//    func allGroups()  -> [Exercise]  {
-//
-//        let groupAEx1 = Exercise(group: "Group A", name: "Bench", numReps: 8, numSets: 4, weight: 135, completed: false, date: Date())
-//        let groupAEx2 = Exercise(group: "Group A", name: "Curls", numReps: 8, numSets: 3, weight: 50, completed: false, date: Date())
-//        let groupAEx3 = Exercise(group: "Group A", name: "Fly's", numReps: 8, numSets: 4, weight: 40, completed: false, date: Date())
-//        let groupAEx4 = Exercise(group: "Group A", name: "Leg Lifts", numReps: 8, numSets: 3, weight: 0, completed: false, date: Date())
-//        let groupBEx1 = Exercise(group: "Group B", name: "Bench B", numReps: 8, numSets: 4, weight: 135, completed: false, date: Date())
-//        let groupBEx2 = Exercise(group: "Group B", name: "Curls B", numReps: 8, numSets: 3, weight: 50, completed: false, date: Date())
-//        let groupBEx3 = Exercise(group: "Group B", name: "Fly's", numReps: 8, numSets: 4, weight: 40, completed: false, date: Date())
-//        let groupBEx4 = Exercise(group: "Group B", name: "Leg Lifts B", numReps: 8, numSets: 3, weight: 0, completed: false, date: Date())
-//
-//        var exercises: [Exercise] = []
-//        exercises.append(groupAEx1)
-//        exercises.append(groupAEx2)
-//        exercises.append(groupAEx3)
-//        exercises.append(groupAEx4)
-//        exercises.append(groupBEx1)
-//        exercises.append(groupBEx2)
-//        exercises.append(groupBEx3)
-//        exercises.append(groupBEx4)
-//        return exercises
-//    }
     
     func GroupA() -> [Exercise] {
         let exercise1 = Exercise(group: "Group A", name: "Bench", numReps: 8, numSets: 4, weight: 135, completed: false, date: Date())
