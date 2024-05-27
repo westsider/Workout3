@@ -10,19 +10,38 @@ import SwiftUI
 struct ExerciseReps: View {
     var exercise: Exercise
     @State var isOn: [Bool] = [false, false, false, false]
+    @State private var weight = 45
     var body: some View {
         VStack {
             ForEach(1...exercise.numSets, id: \.self) { num in
                 HStack {
-                    Text("\(num)")
+//                    Text("\(num)")
+                    //Spacer()
+                    Text("\(weight) lbs")
                     Spacer()
-                    Text("\(exercise.weight) lbs")
+                    Stepper("", onIncrement: {
+                                        weight += 5
+                                    }, onDecrement: {
+                                        weight -= 5
+                                    })
+                   
                     Spacer()
                     Text("\(exercise.numReps) Reps")
                     Spacer()
                     Toggle("", isOn: $isOn[num - 1])
                                 .toggleStyle(CheckToggleStyle())
                 }
+//                HStack {
+//                    Stepper("", onIncrement: {
+//                                        weight += 5
+//                                    }, onDecrement: {
+//                                        weight -= 5
+//                                    })
+//                    Spacer()
+//                    Text("\(weight) lbs")
+//                }
+            }.onAppear() {
+                weight = exercise.weight
             }
         }
     }

@@ -9,12 +9,14 @@
 //  X items incluse num reps, weight and completed
 //  X ui has each item and num reps completed
 //  X toggle set completed
+//  X create aonther workout goup
+//  X step weight
 
-//  create aonther workout goup
 //  main screen
-//  nac to exercise screen
+//  nav to exercise screen
 //  when all completed return to main and show last workout
 //  list all workouts in main
+//  persist values
 
 import SwiftUI
 import SwiftData
@@ -48,7 +50,11 @@ struct ExerciseGroup: View {
     }
     
     private func firstRun() {
-        for item in dataLoader.firstRun() {
+        for item in dataLoader.GroupA() {
+            modelContext.insert(item)
+        }
+        
+        for item in dataLoader.GroupB() {
             modelContext.insert(item)
         }
     }
@@ -58,7 +64,7 @@ struct ExerciseGroup: View {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Exercise.self, configurations: config)
     let dataLoader =  DataLoader()
-    for item in dataLoader.firstRun() {
+    for item in dataLoader.GroupA() {
         container.mainContext.insert(item)
     }
     return ExerciseGroup()
