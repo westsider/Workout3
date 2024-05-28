@@ -55,6 +55,10 @@ struct HomeListRow : View {
                 HStack {
                     Text("\(workout.date.formatted(date: .abbreviated, time: .omitted))")
                     Text(workout.date.formatted(date: .omitted, time: .shortened))
+                    if workout.group != "stretch" {
+                        Spacer()
+                        Text(workout.timeElapsed, format: .timerCountdown)
+                    }
                 }.font(.caption).foregroundStyle(.secondary)
             }
         }
@@ -63,5 +67,5 @@ struct HomeListRow : View {
 
 #Preview {
     HomeListRow(workout: WorkOutNames(name: "Trident",
-                                      description: "Only Easy Day Was Yesterday", image: Image("behind"), progress: 0.8,  group: "Group A", date: Date()))
+                                      description: "Only Easy Day Was Yesterday", image: Image("behind"), progress: 0.8,  group: "Group A", date: Date(), timeElapsed: 60))
 }

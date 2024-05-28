@@ -17,8 +17,8 @@
 //  X show last workout
 //  X improve main UI
 //  X add stretching
+//  X start a workout timer for each workout duration
 
-//  start a workout timer for each workout duration
 //  persist all workouts, dates, duration, make a list
 //  send data to apple workout
 //  remove group array and just use [Exercise] sorted by date decending so next workout is on top
@@ -64,16 +64,16 @@ struct HomeView: View {
                     HStack {
                         switch group {
                         case "Group A" :
-                            HomeListRow(workout: WorkOutNames(name: "Falcon", description: "Don't Get Snatched", image: Image("squat"), progress: 0.25,  group: "Group A", date: groupA.first?.date ?? Date()))
+                            HomeListRow(workout: WorkOutNames(name: "Falcon", description: "Don't Get Snatched", image: Image("squat"), progress: 0.25,  group: "Group A", date: groupA.first?.date ?? Date(), timeElapsed: groupA.first?.timeElapsed ?? 0))
                             
                         case "Group B" :
-                            HomeListRow(workout: WorkOutNames(name: "Deep Horizon", description: "We Take You To Crush Depth", image: Image("behind"), progress: 0.3,  group: "Group B", date: groupB.first?.date ?? Date()))
+                            HomeListRow(workout: WorkOutNames(name: "Deep Horizon", description: "We Take You To Crush Depth", image: Image("behind"), progress: 0.3,  group: "Group B", date: groupB.first?.date ?? Date(), timeElapsed: groupB.first?.timeElapsed ?? 0))
                         case "Group C" :
-                            HomeListRow(workout: WorkOutNames(name: "Challenger", description: "Failure Is Not An Option", image: Image("grip"), progress: 0.8,  group: "Group C", date: groupC.first?.date ?? Date()))
+                            HomeListRow(workout: WorkOutNames(name: "Challenger", description: "Failure Is Not An Option", image: Image("grip"), progress: 0.8,  group: "Group C", date: groupC.first?.date ?? Date(), timeElapsed: groupC.first?.timeElapsed ?? 0))
                         case "Group D" :
-                            HomeListRow(workout: WorkOutNames(name: "Trident",              description: "Only Easy Day Was Yesterday", image: Image("press"), progress: 0.5,  group: "Group D", date: groupD.first?.date ?? Date()))
+                            HomeListRow(workout: WorkOutNames(name: "Trident",              description: "Only Easy Day Was Yesterday", image: Image("press"), progress: 0.5,  group: "Group D", date: groupD.first?.date ?? Date(), timeElapsed: groupD.first?.timeElapsed ?? 0))
                         case "stretch" :
-                            HomeListRow(workout: WorkOutNames(name: "Stretch", description: "Just let it go", image: Image("stretch"), progress: 0.5,  group: "stretch", date: Date()))
+                            HomeListRow(workout: WorkOutNames(name: "Stretch", description: "Just Let It Go", image: Image("stretch"), progress: 0.5,  group: "stretch", date: Date(), timeElapsed: stretch.first?.timeElapsed ?? 0))
                         default:
                             Text("No Date")
                         }

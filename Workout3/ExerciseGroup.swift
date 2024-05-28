@@ -73,6 +73,7 @@ struct ExerciseGroup: View {
                             for each in exercises {
                                 each.completed = false
                                 each.date = Date()
+                                each.timeElapsed = timeElapsed
                             }
                         }
                     }

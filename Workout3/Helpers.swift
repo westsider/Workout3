@@ -38,3 +38,11 @@ struct TimerCountdownFormatStyle: FormatStyle {
 extension FormatStyle where Self == TimerCountdownFormatStyle {
     static var timerCountdown: TimerCountdownFormatStyle { TimerCountdownFormatStyle() }
 }
+
+class PlaceHolders {
+    static func priotDate() -> Date{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        return formatter.date(from: "2023/02/01 22:31") ?? Date()
+    }
+}
