@@ -18,6 +18,11 @@ struct ExerciseGroup: View {
     let groupName: String
     @State var completed = 0
     
+    // timer
+    @State var startDate = Date.now
+    @State var timeElapsed: Int = 60
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     @Query(filter: #Predicate<Exercise> { exercises in
         exercises.group == "Group A"
     }) var exercises: [Exercise]
@@ -30,8 +35,22 @@ struct ExerciseGroup: View {
     }
     
     var body: some View {
+        
         VStack(alignment: .leading) {
-            Text(groupName).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            
+            HStack {
+                Text(groupName).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                Spacer()
+                if groupName != "stretch" {
+                    Text(timeElapsed, format: .timerCountdown)
+                        .foregroundStyle(.secondary)
+                        .onReceive(timer) { firedDate in
+                            print("timer fired")
+                            timeElapsed = Int(firedDate.timeIntervalSince(startDate)) + 240  // 4 minute stretch
+                        }
+                    
+                }
+            }
             List(exercises)  { this in
                 Section(header: Text(this.name)) {
                     ExerciseReps(id: this.id)
@@ -89,6 +108,7 @@ struct ExerciseGroup: View {
     for item in dataLoader.stretch() {
         container.mainContext.insert(item)
     }
-    return ExerciseGroup(groupName: "stretch")
+    return ExerciseGroup(groupName: "Group A")
         .modelContainer(container)
 }
+

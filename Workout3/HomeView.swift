@@ -21,6 +21,7 @@
 //  start a workout timer for each workout duration
 //  persist all workouts, dates, duration, make a list
 //  send data to apple workout
+//  remove group array and just use [Exercise] sorted by date decending so next workout is on top
 
 import SwiftUI
 import SwiftData
@@ -83,7 +84,7 @@ struct HomeView: View {
             
         }
         .onAppear() {
-            deleteExercises()
+            //deleteExercises()
             loadExercises()
         }
     }
