@@ -33,12 +33,12 @@ struct ExerciseGroup: View {
     @Query(filter: #Predicate<Exercise> { exercises in
         exercises.group == "Group A"
     }) var exercises: [Exercise]
-
+    
     init(groupName: String) {
         self.groupName = groupName
-            _exercises = Query(filter: #Predicate<Exercise> { exercisesS in
-                exercisesS.group == groupName
-            })
+        _exercises = Query(filter: #Predicate<Exercise> { exercisesS in
+            exercisesS.group == groupName
+        })
     }
     
     var body: some View {
@@ -51,48 +51,57 @@ struct ExerciseGroup: View {
                     .foregroundStyle(this.completed ? .blue : .primary)
                     .onChange(of: this.completed) { newValue in
                         // checlk for number of completed exercoses
-                        print("exercises changed")
+                        //print("exercises changed")
                         completed = 0
                         for each in exercise {
                             if each.completed {
                                 completed += 1
                             }
                         }
-                        print("Compleded = \(completed) of \(exercises.count) exercises")
+                        print("completed = \(completed) of \(exercises.count) exercises")
                         // if that is all of them >
                         if completed == exercises.count {
                             print("Workout Complete")
                             dismiss()
+                            // 1. reset the completed vars
+                            // 2. update date  on last workout
+                            for each in exercises {
+                                each.completed = false
+                                each.date = Date()
+                            }
                         }
-                        // 1. reset the completed vars
-                        // 2. place date and time on last workout
-                        // 2. segue back to main
-                        
-
                     }
             }
             
         }.onAppear() {
-            loadExercises()
+            //loadExercises()
         }
         .padding()
     }
     
-    private func loadExercises() {
-        if exercise.isEmpty {
-            firstRun()
-        }
-    }
-    
-    private func firstRun() {
-        for item in dataLoader.GroupA() {
-            modelContext.insert(item)
-        }
-        
-        for item in dataLoader.GroupB() {
-            modelContext.insert(item)
-        }
-    }
+//    private func loadExercises() {
+//        if exercise.isEmpty {
+//            firstRun()
+//        }
+//    }
+//    
+//    private func firstRun() {
+//        for item in dataLoader.GroupA() {
+//            modelContext.insert(item)
+//        }
+//        
+//        for item in dataLoader.GroupB() {
+//            modelContext.insert(item)
+//        }
+//        
+//        for item in dataLoader.GroupC() {
+//            modelContext.insert(item)
+//        }
+//        
+//        for item in dataLoader.GroupD() {
+//            modelContext.insert(item)
+//        }
+//    }
 }
 
 #Preview {
