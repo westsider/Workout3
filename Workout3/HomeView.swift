@@ -15,11 +15,11 @@
 //  X when all completed return to main and show last workout
 //  X use correct workouts
 //  X show last workout
-//  improve main UI
+//  X improve main UI
+//  X add stretching
 
-//  add stretching
-//  start a workut timer for each workout
-//  persist all workouts
+//  start a workout timer for each workout duration
+//  persist all workouts, dates, duration, make a list
 //  send data to apple workout
 
 import SwiftUI
@@ -33,7 +33,7 @@ struct HomeView: View {
     let dataLoader =  DataLoader()
     
     // for this view
-    let groups: [String] = ["Group A", "Group B", "Group C", "Group D"]
+    let groups: [String] = ["Group A", "Group B", "Group C", "Group D", "stretch"]
     
     @Query(filter: #Predicate<Exercise> { exercises in
         exercises.group == "Group A"
@@ -51,6 +51,10 @@ struct HomeView: View {
         exercises.group == "Group D"
     }) var groupD: [Exercise]
     
+    @Query(filter: #Predicate<Exercise> { exercises in
+        exercises.group == "stretch"
+    }) var stretch: [Exercise]
+    
     var body: some View {
         
         NavigationView {
@@ -67,6 +71,8 @@ struct HomeView: View {
                             HomeListRow(workout: WorkOutNames(name: "Challenger", description: "Failure Is Not An Option", image: Image("grip"), progress: 0.8,  group: "Group C", date: groupC.first?.date ?? Date()))
                         case "Group D" :
                             HomeListRow(workout: WorkOutNames(name: "Trident",              description: "Only Easy Day Was Yesterday", image: Image("press"), progress: 0.5,  group: "Group D", date: groupD.first?.date ?? Date()))
+                        case "stretch" :
+                            HomeListRow(workout: WorkOutNames(name: "Stretch", description: "Just let it go", image: Image("stretch"), progress: 0.5,  group: "stretch", date: Date()))
                         default:
                             Text("No Date")
                         }
@@ -77,7 +83,7 @@ struct HomeView: View {
             
         }
         .onAppear() {
-            //deleteExercises()
+            deleteExercises()
             loadExercises()
         }
     }
@@ -114,6 +120,10 @@ struct HomeView: View {
         for item in dataLoader.GroupD() {
             modelContext.insert(item)
         }
+        
+        for item in dataLoader.stretch() {
+            modelContext.insert(item)
+        }
     }
     
 }
@@ -136,6 +146,10 @@ struct HomeView: View {
     }
     
     for item in dataLoader.GroupD() {
+        container.mainContext.insert(item)
+    }
+    
+    for item in dataLoader.stretch() {
         container.mainContext.insert(item)
     }
     

@@ -38,8 +38,6 @@ struct ExerciseGroup: View {
                 }.headerProminence(.increased)
                     .foregroundStyle(this.completed ? .blue : .primary)
                     .onChange(of: this.completed) { newValue in
-                        // checlk for number of completed exercoses
-                        //print("exercises changed")
                         completed = 0
                         for each in exercise {
                             if each.completed {
@@ -66,30 +64,6 @@ struct ExerciseGroup: View {
         }
         .padding()
     }
-    
-//    private func loadExercises() {
-//        if exercise.isEmpty {
-//            firstRun()
-//        }
-//    }
-//    
-//    private func firstRun() {
-//        for item in dataLoader.GroupA() {
-//            modelContext.insert(item)
-//        }
-//        
-//        for item in dataLoader.GroupB() {
-//            modelContext.insert(item)
-//        }
-//        
-//        for item in dataLoader.GroupC() {
-//            modelContext.insert(item)
-//        }
-//        
-//        for item in dataLoader.GroupD() {
-//            modelContext.insert(item)
-//        }
-//    }
 }
 
 #Preview {
@@ -112,6 +86,9 @@ struct ExerciseGroup: View {
         container.mainContext.insert(item)
     }
     
-    return ExerciseGroup(groupName: "Group A")
+    for item in dataLoader.stretch() {
+        container.mainContext.insert(item)
+    }
+    return ExerciseGroup(groupName: "stretch")
         .modelContainer(container)
 }
