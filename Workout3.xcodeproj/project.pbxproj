@@ -15,6 +15,7 @@
 		98AA53702C039F70005D095F /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA536F2C039F70005D095F /* Helpers.swift */; };
 		98AA53722C039F96005D095F /* ExerciseReps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA53712C039F96005D095F /* ExerciseReps.swift */; };
 		98AA53742C04E5A8005D095F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA53732C04E5A8005D095F /* HomeView.swift */; };
+		98CEBBBB2C063D2E0047507A /* HomeListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CEBBBA2C063D2E0047507A /* HomeListRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		98AA536F2C039F70005D095F /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		98AA53712C039F96005D095F /* ExerciseReps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseReps.swift; sourceTree = "<group>"; };
 		98AA53732C04E5A8005D095F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		98CEBBBA2C063D2E0047507A /* HomeListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			children = (
 				98AA535F2C02723F005D095F /* Workout3App.swift */,
 				98AA53732C04E5A8005D095F /* HomeView.swift */,
+				98CEBBBA2C063D2E0047507A /* HomeListRow.swift */,
 				98AA53612C02723F005D095F /* ExerciseGroup.swift */,
 				98AA53712C039F96005D095F /* ExerciseReps.swift */,
 				98AA536D2C039F36005D095F /* Data.swift */,
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98CEBBBB2C063D2E0047507A /* HomeListRow.swift in Sources */,
 				98AA53622C02723F005D095F /* ExerciseGroup.swift in Sources */,
 				98AA536E2C039F36005D095F /* Data.swift in Sources */,
 				98AA53722C039F96005D095F /* ExerciseReps.swift in Sources */,
@@ -291,6 +295,8 @@
 				DEVELOPMENT_TEAM = 3BJT5DLG7B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Workout;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -320,6 +326,8 @@
 				DEVELOPMENT_TEAM = 3BJT5DLG7B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Workout;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

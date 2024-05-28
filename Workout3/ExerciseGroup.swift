@@ -4,19 +4,7 @@
 //
 //  Created by Warren Hansen on 5/25/24.
 //
-//  Created by Warren Hansen on 5/25/24.
-//  X make a list of Bench, curls, fly's, lig lift,
-//  X items incluse num reps, weight and completed
-//  X ui has each item and num reps completed
-//  X toggle set completed
-//  X create aonther workout goup
-//  X step weight
-//  X main screen
-//  X nav to exercise screen
-//  when all completed return to main and show last workout
 
-//  use correct workouts
-//  show last workout
 
 import SwiftUI
 import SwiftData

@@ -5,7 +5,7 @@
 //  Created by Warren Hansen on 5/26/24.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 @Model
@@ -91,4 +91,15 @@ class DataLoader {
         exercises.append(exercise5)
         return exercises
     }
+}
+
+struct WorkOutNames: Identifiable {
+    
+    let id = UUID()
+    let name: String
+    let description: String
+    let image: Image
+    let progress: CGFloat
+    let group: String
+    let date: Date
 }
