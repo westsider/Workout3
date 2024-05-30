@@ -8,6 +8,20 @@
 import SwiftUI
 import SwiftData
 
+final class Historical {
+    var id = UUID()
+    var name: String
+    var date: Date
+    var timeElapsed: Int
+    
+    init(id: UUID = UUID(), name: String, date: Date, timeElapsed: Int) {
+        self.id = id
+        self.name = name
+        self.date = date
+        self.timeElapsed = timeElapsed
+    }
+}
+
 @Model
 final class Exercise {
     var id = UUID()

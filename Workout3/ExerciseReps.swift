@@ -50,9 +50,9 @@ struct ExerciseReps: View {
                 // check for completed reps
                 let numSets = exercise.first?.numSets ?? 3
                 let numberOfTrue = isOn.filter{$0}.count
-                //print("completed \(numberOfTrue) of \(numSets)")
+                print("\(String(describing: exercise.first?.name ?? "NA")) completed \(numberOfTrue) of \(numSets)")
                 if numSets == numberOfTrue {
-                   // print("completed!")
+                    print("\ncompleted \(exercise.first?.name ?? "NA") on the ExerciseReps struct\n")
                     exercise.first?.completed = true
                 }
             }

@@ -45,7 +45,7 @@ struct ExerciseGroup: View {
                     Text(timeElapsed, format: .timerCountdown)
                         .foregroundStyle(.secondary)
                         .onReceive(timer) { firedDate in
-                            print("timer fired")
+                            //print("timer fired")
                             timeElapsed = Int(firedDate.timeIntervalSince(startDate)) + 240  // 4 minute stretch
                         }
                     
@@ -57,33 +57,52 @@ struct ExerciseGroup: View {
                 }.headerProminence(.increased)
                     .foregroundStyle(this.completed ? .blue : .primary)
                     .onChange(of: this.completed) { newValue in
-                        completed = 0
-                        for each in exercise {
-                            if each.completed {
-                                completed += 1
-                            }
-                        }
-                        print("completed = \(completed) of \(exercises.count) exercises")
-                        // if that is all of them >
-                        if completed == exercises.count {
-                            print("Workout Complete")
+    
+                        if exercisesCompleted() {
+                            print("Group List Page:  Workout Complete")
+                            resetExercise()
                             dismiss()
-                            // 1. reset the completed vars
-                            // 2. update date  on last workout
-                            for each in exercises {
-                                each.completed = false
-                                each.date = Date()
-                                each.timeElapsed = timeElapsed
-                            }
                         }
                     }
             }
             
         }.onAppear() {
             //loadExercises()
+            resetExercise()
+            debugExerciceCompleted()
         }
         .padding()
     }
+    
+    func resetExercise() {
+        for each in exercises {
+            each.completed = false
+            each.date = Date()
+            each.timeElapsed = timeElapsed
+        }
+    }
+    func debugExerciceCompleted() {
+        for each in exercises {
+            print("ExerciseGroup launched: \(each.name) completed: \(each.completed) on \(each.date)")
+        }
+    }
+    
+    private func exercisesCompleted() -> Bool {
+        var completedExercises: [Bool] {
+            return exercises.map{ $0.completed }
+        }
+        
+        let arrayCount = completedExercises.count
+        let numberOfTrue = completedExercises.filter{$0}.count
+        print("array: \(completedExercises) :: true count \(numberOfTrue) arrayCount: \(arrayCount)")
+        
+        if arrayCount == numberOfTrue {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }
 
 #Preview {

@@ -20,6 +20,14 @@
 //  X start a workout timer for each workout duration
 
 //  persist all workouts, dates, duration, make a list
+/*
+ final class Historical {
+     var id = UUID()
+     var name: String
+     var date: Date
+     var timeElapsed: Int
+     
+ */
 //  send data to apple workout
 //  remove group array and just use [Exercise] sorted by date decending so next workout is on top
 
