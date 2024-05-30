@@ -59,7 +59,7 @@ struct ExerciseGroup: View {
                     .onChange(of: this.completed) { newValue in
     
                         if exercisesCompleted() {
-                            print("Group List Page:  Workout Complete")
+                            //print("Group List Page:  Workout Complete")
                             resetExercise()
                             dismiss()
                         }
@@ -94,7 +94,7 @@ struct ExerciseGroup: View {
         
         let arrayCount = completedExercises.count
         let numberOfTrue = completedExercises.filter{$0}.count
-        print("array: \(completedExercises) :: true count \(numberOfTrue) arrayCount: \(arrayCount)")
+        //print("array: \(completedExercises) :: true count \(numberOfTrue) arrayCount: \(arrayCount)")
         
         if arrayCount == numberOfTrue {
             return true

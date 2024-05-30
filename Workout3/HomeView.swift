@@ -19,8 +19,8 @@
 //  X add stretching
 //  X start a workout timer for each workout duration
 //  X tab bar: home, login, history
+//  X login screen
 
-//  login screen
 //  persist all workouts, dates, duration, make a list
 /*
  final class Historical {
