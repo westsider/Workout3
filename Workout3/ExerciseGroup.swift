@@ -14,6 +14,7 @@ struct ExerciseGroup: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query private var exercise: [Exercise]
+    @Query private var historical: [Historical]
     let dataLoader =  DataLoader()
     let groupName: String
     @State var completed = 0
@@ -60,6 +61,7 @@ struct ExerciseGroup: View {
     
                         if exercisesCompleted() {
                             //print("Group List Page:  Workout Complete")
+                            saveWorkout(name: this.group, date: this.date, elapsed: this.timeElapsed)
                             resetExercise()
                             dismiss()
                         }
@@ -72,6 +74,11 @@ struct ExerciseGroup: View {
             debugExerciceCompleted()
         }
         .padding()
+    }
+    
+    func saveWorkout(name: String, date: Date, elapsed: Int) {
+        let new = Historical(name: name, date: date, timeElapsed: elapsed)
+        modelContext.insert(new)
     }
     
     func resetExercise() {

@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 
+@Model
 final class Historical {
     var id = UUID()
     var name: String

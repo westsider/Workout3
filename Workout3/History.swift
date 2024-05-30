@@ -6,13 +6,49 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct History: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var historical: [Historical]
+    
     var body: some View {
-        Text("Hello, History!")
+        if historical.isEmpty {
+            Text("No History!")
+        }
+        List(historical) { workout in
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(workout.name)
+                    Spacer()
+                    Text(workout.timeElapsed, format: .timerCountdown)
+                    Text("minutes")
+                }
+                
+                HStack {
+                    Text("\(workout.date.formatted(date: .abbreviated, time: .omitted))")
+                    Text(" @ ")
+                    Text(workout.date.formatted(date: .omitted, time: .shortened))
+                }.font(.footnote).foregroundColor(.secondary)
+            }
+        }
     }
 }
 
 #Preview {
-    History()
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Historical.self, configurations: config)
+    let item = Historical(name: "Group A", date: Date(), timeElapsed: 500)
+    container.mainContext.insert(item)
+    return History()
+        .modelContainer(container)
 }
+
+
+/*
+ 
+ if workout.group != "stretch" {
+ Spacer()
+ Text(workout.timeElapsed, format: .timerCountdown)
+ */

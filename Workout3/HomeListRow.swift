@@ -21,7 +21,7 @@ struct HomeListRow : View {
                     .padding(5) // Width of the border
                     .background(Color.primary) // Color of the border
                     .cornerRadius(10)
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading) {
                 Text(workout.name)
                     .foregroundColor(.primary)
                     .font(.headline)

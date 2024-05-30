@@ -13,9 +13,13 @@ struct Workout3App: App {
 
     let modelContainer: ModelContainer
 
+//    let schema = Schema([Exercise.self, Historical.self])
+//    let configuration = ModelConfiguration(inMemory: true)
+//    let container = try! ModelContainer(for: schema, configurations: [configuration])
+    
         init() {
             do {
-                modelContainer = try ModelContainer(for: Exercise.self)
+                modelContainer = try ModelContainer(for: Exercise.self, Historical.self)
             } catch {
                 fatalError("Could not initialize ModelContainer")
             }
