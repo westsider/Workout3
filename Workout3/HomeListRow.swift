@@ -5,29 +5,6 @@
 //  Created by Warren Hansen on 5/28/24.
 //
 
-//class NameData {
-//
-//    let first = WorkOutNames(name: "Falcon",
-//                             description: "Don't Get Snatched", image: Image("squat"), progress: 0.25, group: "Group A", date: Date)
-
-//    let second = WorkOutNames(name: "Deep Horizon",
-//                         description: "We Take You To Crush Depth", image: Image("behind"), progress: 0.3, group: "Group A")
-
-//    let third = WorkOutNames(name: "Challenger",
-//                        description: "Failure Is Not An Option", image: Image("grip"), progress: 0.8, group: "Group A")
-
-//    let forth = WorkOutNames(name: "Trident",
-//                        description: "Only Easy Day Was Yesterday", image: Image("press"), progress: 0.5, group: "Group A")
-//
-//    func load() -> [WorkOutNames] {
-//        var allWorkouts: [WorkOutNames] = []
-//        allWorkouts.append(first)
-//        allWorkouts.append(second)
-//        allWorkouts.append(third)
-//        allWorkouts.append(forth)
-//        return allWorkouts
-//    }
-//}
 import SwiftUI
 
 struct HomeListRow : View {
