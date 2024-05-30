@@ -17,21 +17,32 @@ struct History: View {
         if historical.isEmpty {
             Text("No History!")
         }
-        List(historical) { workout in
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(workout.name)
-                    Spacer()
-                    Text(workout.timeElapsed, format: .timerCountdown)
-                    Text("minutes")
+        List {
+            ForEach(historical, id: \.self) { workout in
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(workout.name)
+                        Spacer()
+                        Text(workout.timeElapsed, format: .timerCountdown)
+                        Text("minutes")
+                    }
+                    
+                    HStack {
+                        Text("\(workout.date.formatted(date: .abbreviated, time: .omitted))")
+                        Text(" @ ")
+                        Text(workout.date.formatted(date: .omitted, time: .shortened))
+                    }.font(.footnote).foregroundColor(.secondary)
                 }
-                
-                HStack {
-                    Text("\(workout.date.formatted(date: .abbreviated, time: .omitted))")
-                    Text(" @ ")
-                    Text(workout.date.formatted(date: .omitted, time: .shortened))
-                }.font(.footnote).foregroundColor(.secondary)
-            }
+            }.onDelete(perform: { indexSet in
+                deleteWorkout(at: indexSet)
+            })
+        }
+    }
+    
+    func deleteWorkout(at offsets: IndexSet) {
+        for offset in offsets {
+            let workout = historical[offset]
+            modelContext.delete(workout)
         }
     }
 }

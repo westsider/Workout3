@@ -20,8 +20,8 @@
 //  X start a workout timer for each workout duration
 //  X tab bar: home, login, history
 //  X login screen
+//  X persist all workouts, dates, duration, make a list
 
-//  persist all workouts, dates, duration, make a list
 //  send data to apple workout
 //  remove group array and just use [Exercise] sorted by date decending so next workout is on top
 
