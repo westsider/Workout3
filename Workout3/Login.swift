@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct Login: View {
+    @State var dateNow: Date = Date()
     var body: some View {
         ZStack {
-
             Image("pfAll")
                 .resizable()
 
-            Text("\(Date().formatted(date: .abbreviated, time: .omitted))")
-                .font(.title)
-                .bold()
+            Text("\(dateNow.formatted(date: .abbreviated, time: .omitted))")
+                .font(.system(size: 28, design: .serif)).fontWeight(.heavy)
                 .foregroundStyle(.white)
                 .background(.black)
                 .offset(CGSize(width: 0.0, height: -290))
@@ -24,6 +23,9 @@ struct Login: View {
         } 
         .edgesIgnoringSafeArea(.all)
         .ignoresSafeArea()
+        .onAppear() {
+            dateNow = Date()
+        }
     }
 }
 
