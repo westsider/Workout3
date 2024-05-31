@@ -42,7 +42,11 @@ struct ExerciseGroup: View {
         
         VStack(alignment: .leading) {
  
-            Text("\(manager.activities) Steps")
+            HStack {
+                Text("\(manager.todaysSteps) Steps")
+                Spacer()
+                Text("\(manager.todaysCalories) calories")
+            }.font(.footnote).foregroundColor(.secondary)
             
             HStack {
                 Text(groupName).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -77,7 +81,6 @@ struct ExerciseGroup: View {
         }.onAppear() {
             //loadExercises()
             resetExercise()
-            manager.fetchTodaysSteps()
             
         }
         .padding()
