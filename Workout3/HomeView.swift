@@ -30,12 +30,10 @@ import SwiftData
 
 struct HomeView: View {
     
-    // to segue
     @Environment(\.modelContext) private var modelContext
     @Query private var exercise: [Exercise]
     let dataLoader =  DataLoader()
     
-    // for this view
     let groups: [String] = ["Group A", "Group B", "Group C", "Group D", "stretch"]
     
     @Query(filter: #Predicate<Exercise> { exercises in
@@ -57,6 +55,9 @@ struct HomeView: View {
     @Query(filter: #Predicate<Exercise> { exercises in
         exercises.group == "stretch"
     }) var stretch: [Exercise]
+    
+    //@EnvironmentObject var manager: HealthManager
+    //@State var activity: Activity
     
     var body: some View {
         
@@ -160,3 +161,5 @@ struct HomeView: View {
         .modelContainer(container)
     
 }
+
+let activityDefault = Activity(id: 0, title: "Daily Steps", subtitle: "Goal 10,000", image: "figure.walk", amount: "200")

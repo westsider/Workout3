@@ -147,3 +147,12 @@ struct WorkOutNames: Identifiable {
     let date: Date
     let timeElapsed: Int
 }
+
+
+struct Activity {
+    let id: Int
+    let title: String
+    let subtitle: String
+    let image: String
+    let amount: String
+}

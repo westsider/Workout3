@@ -35,9 +35,14 @@ struct ExerciseGroup: View {
         })
     }
     
+    @StateObject var manager = HealthManager()
+    @State var todaysSteps: Double = 0.0
+    
     var body: some View {
         
         VStack(alignment: .leading) {
+ 
+            Text("\(manager.activities) Steps")
             
             HStack {
                 Text(groupName).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -72,6 +77,7 @@ struct ExerciseGroup: View {
         }.onAppear() {
             //loadExercises()
             resetExercise()
+            manager.fetchTodaysSteps()
             
         }
         .padding()

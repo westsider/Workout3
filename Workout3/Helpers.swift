@@ -46,3 +46,9 @@ class PlaceHolders {
         return formatter.date(from: "2023/02/01 22:31") ?? Date()
     }
 }
+
+extension Date {
+    static var startOfDay: Date {
+        Calendar.current.startOfDay(for: Date())
+    }
+}

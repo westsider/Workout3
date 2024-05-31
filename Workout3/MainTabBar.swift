@@ -14,13 +14,15 @@ struct MainTabBar: View {
     @Query private var exercise: [Exercise]
     let dataLoader =  DataLoader()
     
+    //@EnvironmentObject var manager: HealthManager
+    
     var body: some View {
         TabView {
             HomeView()
                 .tabItem {
                     Label("Home", systemImage: "list.dash")
                 }
-            
+                //.environmentObject(manager)
             Login()
                 .tabItem {
                     Label("Login", systemImage: "square.and.pencil")
