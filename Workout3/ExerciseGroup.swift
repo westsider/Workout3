@@ -61,7 +61,8 @@ struct ExerciseGroup: View {
     
                         if exercisesCompleted() {
                             //print("Group List Page:  Workout Complete")
-                            saveWorkout(name: this.group, date: this.date, elapsed: this.timeElapsed)
+                            saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
+                            debugExerciceCompleted()
                             resetExercise()
                             dismiss()
                         }
@@ -71,7 +72,7 @@ struct ExerciseGroup: View {
         }.onAppear() {
             //loadExercises()
             resetExercise()
-            debugExerciceCompleted()
+            
         }
         .padding()
     }
@@ -90,7 +91,7 @@ struct ExerciseGroup: View {
     }
     func debugExerciceCompleted() {
         for each in exercises {
-            print("ExerciseGroup launched: \(each.name) completed: \(each.completed) on \(each.date)")
+            print("ExerciseGroup debud: \(each.name) completed: \(each.completed) on \(each.date) elapsed \(each.timeElapsed)")
         }
     }
     
@@ -101,7 +102,7 @@ struct ExerciseGroup: View {
         
         let arrayCount = completedExercises.count
         let numberOfTrue = completedExercises.filter{$0}.count
-        //print("array: \(completedExercises) :: true count \(numberOfTrue) arrayCount: \(arrayCount)")
+        print("array: \(completedExercises) :: true count \(numberOfTrue) arrayCount: \(arrayCount)")
         
         if arrayCount == numberOfTrue {
             return true
