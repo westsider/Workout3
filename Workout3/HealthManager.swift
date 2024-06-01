@@ -8,6 +8,12 @@
 import Foundation
 import HealthKit
 
+
+/*
+    June 1 2024, made a beginning to helth store by retrieving health data.
+    the path to send workouts seems very comples so I am pausing here.
+ */
+
 class HealthManager: ObservableObject {
     
     let healthStore = HKHealthStore()

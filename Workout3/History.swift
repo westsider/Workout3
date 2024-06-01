@@ -45,13 +45,6 @@ struct History: View {
             modelContext.delete(workout)
         }
     }
-    
-    func sortDate() {
-//        let convertedObjects = testObjects
-//            .map { return ($0, dateFormatter.date(from: $0.dateStr)!) }
-//            .sorted { $0.1 > $1.1 }
-//            .map(\.0)
-    }
 }
 
 #Preview {
