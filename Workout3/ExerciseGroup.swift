@@ -35,6 +35,7 @@ struct ExerciseGroup: View {
         })
     }
     
+    // steps and calories
     @StateObject var manager = HealthManager()
     @State var todaysSteps: Double = 0.0
     
@@ -70,6 +71,7 @@ struct ExerciseGroup: View {
     
                         if exercisesCompleted() {
                             //print("Group List Page:  Workout Complete")
+                            getCaloriesAndSteps()
                             saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
                             //debugExerciceCompleted()
                             resetExercise()
@@ -84,6 +86,23 @@ struct ExerciseGroup: View {
             
         }
         .padding()
+    }
+    
+    func getCaloriesAndSteps() {
+        print("calculating steps and calories: TODO")
+        let priorSteps = manager.todaysSteps
+        let priorCalories = manager.todaysCalories
+        
+        // get new totals
+        manager.fetchTodaysSteps()
+        manager.fetchTodaysCalories()
+        let newSteps = manager.todaysSteps
+        let newCalories = manager.todaysCalories
+        
+        // https://www.youtube.com/watch?v=RN_ZgV0Lk-Y
+        // Mark: - TODO: - calc calories and steps
+        // Mark: - TODO: - save to this apps history objetc
+        // Mark: - TODO: - send to healthkit that we did a workout
     }
     
     func saveWorkout(name: String, date: Date, elapsed: Int) {

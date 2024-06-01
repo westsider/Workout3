@@ -11,7 +11,7 @@ import SwiftData
 struct History: View {
     
     @Environment(\.modelContext) private var modelContext
-    @Query private var historical: [Historical]
+    @Query(sort: \Historical.date, order: .reverse) var historical: [Historical]
     
     var body: some View {
         if historical.isEmpty {
@@ -44,6 +44,13 @@ struct History: View {
             let workout = historical[offset]
             modelContext.delete(workout)
         }
+    }
+    
+    func sortDate() {
+//        let convertedObjects = testObjects
+//            .map { return ($0, dateFormatter.date(from: $0.dateStr)!) }
+//            .sorted { $0.1 > $1.1 }
+//            .map(\.0)
     }
 }
 

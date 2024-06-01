@@ -25,6 +25,10 @@
 //  send data to apple workout
 //  remove group array and just use [Exercise] sorted by date decending so next workout is on top
 
+// access workouts https://www.youtube.com/watch?v=RN_ZgV0Lk-Y
+
+
+
 import SwiftUI
 import SwiftData
 
