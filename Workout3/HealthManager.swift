@@ -87,5 +87,57 @@ class HealthManager: ObservableObject {
         }
         healthStore.execute(query)
     }
+    
+    // neew to implement this fun when exercise completes
+    func createWeightTrainingWorkout(start: Date, end: Date, energyBurned: Double, completion: @escaping (Bool, Error?) -> Void) {
+        guard let activeEnergyType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
+            completion(false, NSError(domain: "HealthKit", code: 1, userInfo: [NSLocalizedDescriptionKey: "Active energy type is unavailable."]))
+            return
+        }
+        
+        let energyBurnedQuantity = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: energyBurned)
+        let energyBurnedSample = HKQuantitySample(type: activeEnergyType, quantity: energyBurnedQuantity, start: start, end: end)
+        
+        let workout = HKWorkout(activityType: .traditionalStrengthTraining,
+                                start: start,
+                                end: end,
+                                workoutEvents: nil,
+                                totalEnergyBurned: energyBurnedQuantity,
+                                totalDistance: nil,
+                                metadata: nil)
+        
+        healthStore.save(workout) { success, error in
+            if success {
+                self.healthStore.add([energyBurnedSample], to: workout) { success, error in
+                    completion(success, error)
+                }
+            } else {
+                completion(success, error)
+            }
+        }
+    }
+    
+    /* here is how to implement it!
+     let healthStoreManager = HealthStoreManager()
+     let startDate = Date() // replace with actual start date
+     let endDate = Date() // replace with actual end date
+     let energyBurned = 300.0 // replace with actual energy burned in kilocalories
+
+     healthStoreManager.requestAuthorization { success, error in
+         if success {
+             healthStoreManager.createWeightTrainingWorkout(start: startDate, end: endDate, energyBurned: energyBurned) { success, error in
+                 if success {
+                     print("Workout saved successfully!")
+                 } else {
+                     print("Error saving workout: \(String(describing: error?.localizedDescription))")
+                 }
+             }
+         } else {
+             print("Authorization failed: \(String(describing: error?.localizedDescription))")
+         }
+     }
+
+     */
+
 }
 
