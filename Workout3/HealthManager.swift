@@ -20,14 +20,28 @@ class HealthManager: ObservableObject {
     @Published var todaysSteps: String = "No Steps"
     @Published var todaysCalories: String = "No Calories"
     
+
+    
     init() {
-        let steps = HKQuantityType(.stepCount)
-        let calories = HKQuantityType(.activeEnergyBurned)
-        let healthTypes: Set = [steps, calories]
+//        let steps = HKQuantityType(.stepCount)
+//        let calories = HKQuantityType(.activeEnergyBurned)
+//        let healthTypes: Set = [steps, calories]
+        
+        let typesToShare: Set = [
+                    HKObjectType.workoutType(),
+                    HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!
+                ]
+                
+                let typesToRead: Set = [
+                    HKObjectType.workoutType(),
+                    HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                    HKQuantityType(.stepCount),
+                    HKQuantityType(.activeEnergyBurned)
+                ]
         
         Task {
             do {
-                try await healthStore.requestAuthorization(toShare: [],read: healthTypes)
+                try await healthStore.requestAuthorization(toShare: typesToShare,read: typesToRead)
                 fetchTodaysSteps()
                 fetchTodaysCalories()
             } catch {
