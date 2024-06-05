@@ -19,14 +19,8 @@ class HealthManager: ObservableObject {
     let healthStore = HKHealthStore()
     @Published var todaysSteps: String = "No Steps"
     @Published var todaysCalories: String = "No Calories"
-    
 
-    
     init() {
-//        let steps = HKQuantityType(.stepCount)
-//        let calories = HKQuantityType(.activeEnergyBurned)
-//        let healthTypes: Set = [steps, calories]
-        
         let typesToShare: Set = [
                     HKObjectType.workoutType(),
                     HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!

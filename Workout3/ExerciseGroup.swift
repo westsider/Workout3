@@ -39,10 +39,16 @@ struct ExerciseGroup: View {
     @StateObject var manager = HealthManager()
     @State var todaysSteps: Double = 0.0
     
+    func calculateCaloriesBurned(weightInKg: Double, durationInMinutes: Double, metValue: Double) -> Double {
+        let durationInHours = durationInMinutes / 60.0
+        let caloriesBurned = metValue * weightInKg * durationInHours
+        return caloriesBurned
+    }
+    
     var body: some View {
         
         VStack(alignment: .leading) {
- 
+            
             HStack {
                 Text("\(manager.todaysSteps) Steps")
                 Spacer()
@@ -68,11 +74,12 @@ struct ExerciseGroup: View {
                 }.headerProminence(.increased)
                     .foregroundStyle(this.completed ? .blue : .primary)
                     .onChange(of: this.completed) { newValue in
-    
+                        
                         if exercisesCompleted() {
                             //print("Group List Page:  Workout Complete")
                             getCaloriesAndSteps()
                             saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
+                            updateHealthKit()
                             //debugExerciceCompleted()
                             resetExercise()
                             dismiss()
@@ -88,6 +95,32 @@ struct ExerciseGroup: View {
         .padding()
     }
     
+    func updateHealthKit() {
+        // Example usage:
+        let weightInKg = 97.5224 // 215 lbs
+        let durationInMinutes = timeElapsed / 60 // Total workout duration in minutes from seconds divided by 60
+        let metValue = 4.5 // MET value for moderate weight training
+        
+        let caloriesBurned = calculateCaloriesBurned(weightInKg: weightInKg, durationInMinutes: Double(durationInMinutes), metValue: metValue)
+        print("Calories burned: \(caloriesBurned)")
+        
+        let endDate = Date()
+        let startDate = startDate
+        // Adding 4 minutes to the current date to include stretch
+        let calendar = Calendar.current
+        guard let dateWithStretch = calendar.date(byAdding: .minute, value: 4, to: endDate)  else {
+            print("There was an error adding 4 minutes to the current date.")
+            return
+        }
+
+        manager.createWeightTrainingWorkout(start: startDate, end: dateWithStretch, energyBurned: caloriesBurned) { success, error in
+            if success {
+                print("Workout saved successfully! \(durationInMinutes) minutes \(caloriesBurned) calories")
+            } else {
+                print("Error saving workout: \(String(describing: error?.localizedDescription))")
+            }
+        }
+    }
     func getCaloriesAndSteps() {
         print("calculating steps and calories: TODO")
         let priorSteps = manager.todaysSteps
@@ -98,11 +131,6 @@ struct ExerciseGroup: View {
         manager.fetchTodaysCalories()
         let newSteps = manager.todaysSteps
         let newCalories = manager.todaysCalories
-        
-        // https://www.youtube.com/watch?v=RN_ZgV0Lk-Y
-        // Mark: - TODO: - calc calories and steps
-        // Mark: - TODO: - save to this apps history objetc
-        // Mark: - TODO: - send to healthkit that we did a workout
     }
     
     func saveWorkout(name: String, date: Date, elapsed: Int) {
