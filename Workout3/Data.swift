@@ -111,16 +111,6 @@ class DataLoader {
     }
     
     func stretch() -> [Exercise] {
-        /*
-            Warm ups
-         Band Pull aparts * 20
-         Glute Bridges * 20
-         Hip Flexor Stretch * 3 each side
-         Yoga Push Up * 10
-         Fire Hydrant 10 each side
-         
-         https://vimeo.com/237828102/854ab8806d
-         */
         let exercise1 = Exercise(group: "stretch", name: "Band Pulls", numReps: 12, numSets: 1, weight: 0, completed: false, date: PlaceHolders.priotDate())
         let exercise2 = Exercise(group: "stretch", name: "Glute Back Bridges", numReps: 20, numSets: 1, weight: 0, completed: false, date: PlaceHolders.priotDate())
         let exercise3 = Exercise(group: "stretch", name: "Hip Flexor Stretch", numReps: 3, numSets: 1, weight: 0, completed: false, date: PlaceHolders.priotDate())
@@ -132,6 +122,23 @@ class DataLoader {
         exercises.append(exercise3)
         exercises.append(exercise4)
         exercises.append(exercise5)
+        return exercises
+    }
+    
+    func calisthenics() -> [Exercise] {
+        let exercise1 = Exercise(group: "Calisthenics", name: "Push Ups", numReps: 10, numSets: 2, weight: 0, completed: false, date: PlaceHolders.priotDate())
+        let exercise2 = Exercise(group: "Calisthenics", name: "Sit Ups", numReps: 10, numSets: 2, weight: 0, completed: false, date: PlaceHolders.priotDate())
+        let exercise3 = Exercise(group: "Calisthenics", name: "Squats", numReps: 10, numSets: 2, weight: 0, completed: false, date: PlaceHolders.priotDate())
+        let exercise4 = Exercise(group: "Calisthenics", name: "Back Lunges", numReps: 10, numSets: 2, weight: 0, completed: false, date: PlaceHolders.priotDate())
+        let exercise5 = Exercise(group: "Calisthenics", name: "Jump Squats", numReps: 10, numSets: 2, weight: 0, completed: false, date: PlaceHolders.priotDate())
+        let exercise6 = Exercise(group: "Calisthenics", name: "Side Plank", numReps: 1, numSets: 2, weight: 0, completed: false, date: PlaceHolders.priotDate())
+        var exercises: [Exercise] = []
+        exercises.append(exercise1)
+        exercises.append(exercise2)
+        exercises.append(exercise3)
+        exercises.append(exercise4)
+        exercises.append(exercise5)
+        exercises.append(exercise6)
         return exercises
     }
 }

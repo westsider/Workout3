@@ -38,7 +38,7 @@ struct HomeView: View {
     @Query private var exercise: [Exercise]
     let dataLoader =  DataLoader()
     
-    let groups: [String] = ["Group A", "Group B", "Group C", "Group D", "stretch"]
+    let groups: [String] = ["Group A", "Group B", "Group C", "Group D", "stretch", "Calisthenics"]
     
     @Query(filter: #Predicate<Exercise> { exercises in
         exercises.group == "Group A"
@@ -59,6 +59,10 @@ struct HomeView: View {
     @Query(filter: #Predicate<Exercise> { exercises in
         exercises.group == "stretch"
     }) var stretch: [Exercise]
+    
+    @Query(filter: #Predicate<Exercise> { exercises in
+        exercises.group == "Calisthenics"
+    }) var calisthenics: [Exercise]
     
     //@EnvironmentObject var manager: HealthManager
     //@State var activity: Activity
@@ -81,6 +85,8 @@ struct HomeView: View {
                             HomeListRow(workout: WorkOutNames(name: "Trident",              description: "Only Easy Day Was Yesterday", image: Image("press"), progress: 0.5,  group: "Group D", date: groupD.first?.date ?? Date(), timeElapsed: groupD.first?.timeElapsed ?? 0))
                         case "stretch" :
                             HomeListRow(workout: WorkOutNames(name: "Stretch", description: "Just Let It Go", image: Image("stretch"), progress: 0.5,  group: "stretch", date: Date(), timeElapsed: stretch.first?.timeElapsed ?? 0))
+                        case "Calisthenics" :
+                            HomeListRow(workout: WorkOutNames(name: "Calisthenics", description: "Just Get It Done", image: Image("stretch"), progress: 0.5,  group: "stretch", date: Date(), timeElapsed: stretch.first?.timeElapsed ?? 0))
                         default:
                             Text("No Date")
                         }
@@ -132,6 +138,10 @@ struct HomeView: View {
         for item in dataLoader.stretch() {
             modelContext.insert(item)
         }
+        
+        for item in dataLoader.calisthenics() {
+            modelContext.insert(item)
+        }
     }
     
 }
@@ -161,6 +171,9 @@ struct HomeView: View {
         container.mainContext.insert(item)
     }
     
+    for item in dataLoader.calisthenics() {
+        container.mainContext.insert(item)
+    }
     return HomeView()
         .modelContainer(container)
     

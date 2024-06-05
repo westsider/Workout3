@@ -164,7 +164,11 @@ struct ExerciseGroup: View {
     for item in dataLoader.stretch() {
         container.mainContext.insert(item)
     }
-    return ExerciseGroup(groupName: "Group A")
+    
+    for item in dataLoader.calisthenics() {
+        container.mainContext.insert(item)
+    }
+    return ExerciseGroup(groupName: "Calisthenics")
         .modelContainer(container)
 }
 
