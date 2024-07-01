@@ -75,7 +75,8 @@ struct ExerciseGroup: View {
                     .foregroundStyle(this.completed ? .blue : .primary)
                     .onChange(of: this.completed) { newValue in
                         
-                        if exercisesCompleted() {
+                        // save workout unless its a stretch
+                        if exercisesCompleted() && groupName != "stretch"  {
                             //print("Group List Page:  Workout Complete")
                             getCaloriesAndSteps()
                             saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
