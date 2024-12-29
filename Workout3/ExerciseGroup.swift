@@ -78,11 +78,20 @@ struct ExerciseGroup: View {
                         // save workout unless its a stretch
                         if exercisesCompleted() && groupName != "stretch"  {
                             print("Group List Page:  \(this.group) Workout Complete on \(this.date)")
-                            completeExercise(group: this.group, date: this.date)
+                            getCaloriesAndSteps()
+                            saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
+                            updateHealthKit()
+                            //debugExerciceCompleted()
+                            resetExercise()
+                            dismiss()
                         }
                         // after 45 mins, mark exercise as complete
                         if timeElapsed > 2700 { 
-                            completeExercise(group: this.group, date: this.date)
+                            getCaloriesAndSteps()
+                            saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
+                            updateHealthKit()
+                            //debugExerciceCompleted()
+                            resetExercise()
                         }
                     }
             }
@@ -93,14 +102,14 @@ struct ExerciseGroup: View {
         .padding()
     }
     
-    func completeExercise(group: String, date: Date) {
-        getCaloriesAndSteps()
-        saveWorkout(name: group, date: date, elapsed: timeElapsed)
-        updateHealthKit()
-        //debugExerciceCompleted()
-        resetExercise()
-        dismiss()
-    }
+//    func completeExercise(group: String, date: Date) {
+//        getCaloriesAndSteps()
+//        saveWorkout(name: group, date: date, elapsed: timeElapsed)
+//        updateHealthKit()
+//        //debugExerciceCompleted()
+//        resetExercise()
+//        dismiss()
+//    }
     
     func updateHealthKit() {
         // Example usage:
