@@ -62,8 +62,8 @@ struct ExerciseGroup: View {
                     Text(timeElapsed, format: .timerCountdown)
                         .foregroundStyle(.secondary)
                         .onReceive(timer) { firedDate in
-                            //print("timer fired")
                             timeElapsed = Int(firedDate.timeIntervalSince(startDate)) + 240  // 4 minute stretch
+                            print("timer \((timeElapsed))")
                         }
                     
                 }
@@ -86,12 +86,12 @@ struct ExerciseGroup: View {
                             dismiss()
                         }
                         // after 45 mins, mark exercise as complete
-                        if timeElapsed > 2700 { 
+                        if timeElapsed > 4000 {
                             getCaloriesAndSteps()
                             saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
                             updateHealthKit()
                             //debugExerciceCompleted()
-                            resetExercise()
+                            //resetExercise()
                         }
                     }
             }
@@ -102,14 +102,14 @@ struct ExerciseGroup: View {
         .padding()
     }
     
-//    func completeExercise(group: String, date: Date) {
-//        getCaloriesAndSteps()
-//        saveWorkout(name: group, date: date, elapsed: timeElapsed)
-//        updateHealthKit()
-//        //debugExerciceCompleted()
-//        resetExercise()
-//        dismiss()
-//    }
+    //    func completeExercise(group: String, date: Date) {
+    //        getCaloriesAndSteps()
+    //        saveWorkout(name: group, date: date, elapsed: timeElapsed)
+    //        updateHealthKit()
+    //        //debugExerciceCompleted()
+    //        resetExercise()
+    //        dismiss()
+    //    }
     
     func updateHealthKit() {
         // Example usage:
@@ -128,7 +128,7 @@ struct ExerciseGroup: View {
             print("There was an error adding 4 minutes to the current date.")
             return
         }
-
+        
         manager.createWeightTrainingWorkout(start: startDate, end: dateWithStretch, energyBurned: caloriesBurned) { success, error in
             if success {
                 print("Workout saved successfully! \(durationInMinutes) minutes \(caloriesBurned) calories")
