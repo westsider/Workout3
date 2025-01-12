@@ -13,28 +13,25 @@ struct MainTabBar: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var exercise: [Exercise]
     let dataLoader =  DataLoader()
-    
-    //@EnvironmentObject var manager: HealthManager
-    
+
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "list.dash")
-                }
-                //.environmentObject(manager)
-            Login()
-                .tabItem {
-                    Label("Login", systemImage: "square.and.pencil")
-                }
-            History()
-                .tabItem {
-                    Label("History", systemImage: "square.and.pencil")
-                }
-        }.onAppear() {
-            loadExercises()
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Label("Home", systemImage: "list.dash")
+                    }
+                Login()
+                    .tabItem {
+                        Label("Login", systemImage: "person.circle")
+                    }
+                History()
+                    .tabItem {
+                        Label("History", systemImage: "clock")
+                    }
+            }.onAppear() {
+                loadExercises()
+            }
         }
-    }
     
     private func loadExercises() {
         if exercise.isEmpty {

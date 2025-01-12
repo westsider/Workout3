@@ -63,7 +63,6 @@ struct ExerciseGroup: View {
                         .foregroundStyle(.secondary)
                         .onReceive(timer) { firedDate in
                             timeElapsed = Int(firedDate.timeIntervalSince(startDate)) + 240  // 4 minute stretch
-                            print("timer \((timeElapsed))")
                         }
                     
                 }

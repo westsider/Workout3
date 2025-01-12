@@ -14,30 +14,33 @@ struct History: View {
     @Query(sort: \Historical.date, order: .reverse) var historical: [Historical]
     
     var body: some View {
-        if historical.isEmpty {
-            Text("No History!")
-        }
         List {
-            ForEach(historical, id: \.self) { workout in
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(workout.name)
-                        Spacer()
-                        Text(workout.timeElapsed, format: .timerCountdown)
-                        Text("minutes")
+            if historical.isEmpty {
+                Text("No History!")
+            } else {
+                ForEach(historical, id: \.self) { workout in
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(workout.name)
+                            Spacer()
+                            Text(workout.timeElapsed, format: .timerCountdown)
+                            Text("minutes")
+                        }
+                        
+                        HStack {
+                            Text("\(workout.date.formatted(date: .abbreviated, time: .omitted))")
+                            Text(" @ ")
+                            Text(workout.date.formatted(date: .omitted, time: .shortened))
+                        }
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
                     }
-                    
-                    HStack {
-                        Text("\(workout.date.formatted(date: .abbreviated, time: .omitted))")
-                        Text(" @ ")
-                        Text(workout.date.formatted(date: .omitted, time: .shortened))
-                    }.font(.footnote).foregroundColor(.secondary)
                 }
-            }.onDelete(perform: { indexSet in
-                deleteWorkout(at: indexSet)
-            })
+                .onDelete(perform: deleteWorkout)
+            }
         }
     }
+
     
     func deleteWorkout(at offsets: IndexSet) {
         for offset in offsets {
