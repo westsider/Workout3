@@ -86,10 +86,11 @@ struct ExerciseGroup: View {
                         }
                         // after 45 mins, mark exercise as complete
                         if timeElapsed > 4000 {
+                            print("\nTime Elapsed\n")
                             getCaloriesAndSteps()
                             saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
                             updateHealthKit()
-                            //debugExerciceCompleted()
+                            debugExerciceCompleted()
                             //resetExercise()
                         }
                     }
@@ -100,15 +101,6 @@ struct ExerciseGroup: View {
         }
         .padding()
     }
-    
-    //    func completeExercise(group: String, date: Date) {
-    //        getCaloriesAndSteps()
-    //        saveWorkout(name: group, date: date, elapsed: timeElapsed)
-    //        updateHealthKit()
-    //        //debugExerciceCompleted()
-    //        resetExercise()
-    //        dismiss()
-    //    }
     
     func updateHealthKit() {
         // Example usage:

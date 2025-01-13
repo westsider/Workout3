@@ -63,13 +63,10 @@ struct HomeView: View {
     @Query(filter: #Predicate<Exercise> { exercises in
         exercises.group == "Calisthenics"
     }) var calisthenics: [Exercise]
-    
-    //@EnvironmentObject var manager: HealthManager
-    //@State var activity: Activity
-    
+
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             List(groups, id: \.self) { group in
                 NavigationLink(destination: ExerciseGroup(groupName: group)) {
                     HStack {
@@ -143,7 +140,6 @@ struct HomeView: View {
             modelContext.insert(item)
         }
     }
-    
 }
 
 #Preview {
