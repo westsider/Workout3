@@ -49,11 +49,11 @@ struct ExerciseGroup: View {
         
         VStack(alignment: .leading) {
             
-            HStack {
-                Text("\(manager.todaysSteps) Steps")
-                Spacer()
-                Text("\(manager.todaysCalories) calories")
-            }.font(.footnote).foregroundColor(.secondary)
+//            HStack {
+//                Text("\(manager.todaysSteps) Steps")
+//                Spacer()
+//                Text("\(manager.todaysCalories) calories")
+//            }.font(.footnote).foregroundColor(.secondary)
             
             HStack {
                 Text(groupName).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -62,9 +62,10 @@ struct ExerciseGroup: View {
                     Text(timeElapsed, format: .timerCountdown)
                         .foregroundStyle(.secondary)
                         .onReceive(timer) { firedDate in
-                            timeElapsed = Int(firedDate.timeIntervalSince(startDate)) + 240  // 4 minute stretch
+                            if UIApplication.shared.applicationState == .active {
+                                timeElapsed = Int(firedDate.timeIntervalSince(startDate)) + 240  // 4 minute stretch
+                            }
                         }
-                    
                 }
             }
             List(exercises)  { this in
@@ -73,31 +74,21 @@ struct ExerciseGroup: View {
                 }.headerProminence(.increased)
                     .foregroundStyle(this.completed ? .blue : .primary)
                     .onChange(of: this.completed) { newValue in
-                        
+
                         // save workout unless its a stretch
-                        if exercisesCompleted() && groupName != "stretch"  {
+                        if exercisesCompleted() && groupName != "stretch" && UIApplication.shared.applicationState == .active  {
                             print("Group List Page:  \(this.group) Workout Complete on \(this.date)")
+                            print("Completed status changed for \(this.name): \(newValue)")
                             getCaloriesAndSteps()
                             saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
                             updateHealthKit()
                             //debugExerciceCompleted()
                             resetExercise()
-                            dismiss()
-                        }
-                        // after 45 mins, mark exercise as complete
-                        if timeElapsed > 4000 {
-                            print("\nTime Elapsed\n")
-                            getCaloriesAndSteps()
-                            saveWorkout(name: this.group, date: this.date, elapsed: timeElapsed)
-                            updateHealthKit()
-                            debugExerciceCompleted()
-                            //resetExercise()
+                            //dismiss()
                         }
                     }
             }
             
-        }.onAppear() {
-            resetExercise()
         }
         .padding()
     }
@@ -130,14 +121,14 @@ struct ExerciseGroup: View {
     }
     func getCaloriesAndSteps() {
         print("calculating steps and calories: TODO")
-        let priorSteps = manager.todaysSteps
-        let priorCalories = manager.todaysCalories
+        //let priorSteps = manager.todaysSteps
+        //let priorCalories = manager.todaysCalories
         
         // get new totals
         manager.fetchTodaysSteps()
         manager.fetchTodaysCalories()
-        let newSteps = manager.todaysSteps
-        let newCalories = manager.todaysCalories
+        //let newSteps = manager.todaysSteps
+        //let newCalories = manager.todaysCalories
     }
     
     func saveWorkout(name: String, date: Date, elapsed: Int) {
@@ -165,7 +156,6 @@ struct ExerciseGroup: View {
         
         let arrayCount = completedExercises.count
         let numberOfTrue = completedExercises.filter{$0}.count
-        //print("array: \(completedExercises) :: true count \(numberOfTrue) arrayCount: \(arrayCount)")
         
         if arrayCount == numberOfTrue {
             return true
